@@ -1,0 +1,9 @@
+name: BPTools
+author: BlocksParty
+main: me.blocksparty.tools.Tools
+version: 1.0
+description: >
+             Tools.
+commands:
+  bptools:
+    description: The BPTools Command!
