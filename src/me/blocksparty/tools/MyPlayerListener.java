@@ -26,6 +26,8 @@ public class MyPlayerListener implements Listener{
 	public static Map<String, String> autopilot = new HashMap<String, String>();
 	public static Map<String, String> normal = new HashMap<String, String>();
 	public static Map<String, String> high = new HashMap<String, String>();
+	public static HashMap<Player, Material> paintbrush = new HashMap<Player, Material>();
+	public static HashMap<Player, Material> buildbrush = new HashMap<Player, Material>();
 
 	@EventHandler
 	public void onPlayerInteract(PlayerInteractEvent event){
@@ -39,6 +41,8 @@ public class MyPlayerListener implements Listener{
 			MaterialData rosered = new MaterialData(Material.INK_SACK, (byte) 1);
 			MaterialData cactusgreen = new MaterialData(Material.INK_SACK, (byte) 2);
 			MaterialData cocoabeans = new MaterialData(Material.INK_SACK, (byte) 3);
+			MaterialData lapislazuli = new MaterialData(Material.INK_SACK, (byte) 4);
+			MaterialData purpledye = new MaterialData(Material.INK_SACK, (byte) 5);
 
 		if(materialdata.equals(inksac)){
 				if(event.getAction() == Action.RIGHT_CLICK_AIR){
@@ -112,6 +116,44 @@ public class MyPlayerListener implements Listener{
 					player.updateInventory();
 					player.sendMessage(ChatColor.LIGHT_PURPLE + "Enjoy Your; " + ChatColor.WHITE + material + ChatColor.LIGHT_PURPLE + "!");
 				}
+		}else if(materialdata.equals(lapislazuli)){
+			event.setCancelled(true);
+				if(event.getAction() == Action.LEFT_CLICK_BLOCK){
+					Block clickedblock = event.getClickedBlock();
+					Material material = clickedblock.getType();
+					paintbrush.put(event.getPlayer(), event.getClickedBlock().getType());
+					player.sendMessage(ChatColor.LIGHT_PURPLE + "The Paint Brush Is Set To; " + ChatColor.WHITE + material + ChatColor.LIGHT_PURPLE + "!");
+				}else if(event.getAction() == Action.RIGHT_CLICK_BLOCK){
+					if (paintbrush.isEmpty()) return;
+						event.getClickedBlock().setType(paintbrush.get(event.getPlayer()));
+						player.sendMessage(ChatColor.LIGHT_PURPLE + "Splat!");
+				}else if(event.getAction() == Action.RIGHT_CLICK_AIR){
+					if (paintbrush.isEmpty()) return;
+					Block targetblock = player.getTargetBlock(null, 50);
+					Block block = targetblock;
+					block.setType(paintbrush.get(event.getPlayer()));
+					player.sendMessage(ChatColor.LIGHT_PURPLE + "Splat!");
+			}
+		}else if(materialdata.equals(purpledye)){
+			event.setCancelled(true);
+				if(event.getAction() == Action.LEFT_CLICK_BLOCK){
+					Block clickedblock = event.getClickedBlock();
+					Material material = clickedblock.getType();
+					buildbrush.put(event.getPlayer(), event.getClickedBlock().getType());
+					player.sendMessage(ChatColor.LIGHT_PURPLE + "The Build Brush Is Set To; " + ChatColor.WHITE + material + ChatColor.LIGHT_PURPLE + "!");
+				}else if(event.getAction() == Action.RIGHT_CLICK_BLOCK){
+					if (buildbrush.isEmpty()) return;
+						Block clickedblock = event.getClickedBlock();
+						Block block = clickedblock.getRelative(BlockFace.UP);
+						block.setType(buildbrush.get(event.getPlayer()));
+						player.sendMessage(ChatColor.LIGHT_PURPLE + "Poof!");
+				}else if(event.getAction() == Action.RIGHT_CLICK_AIR){
+					if (buildbrush.isEmpty()) return;
+					Block targetblock = player.getTargetBlock(null, 50);
+					Block block = targetblock;
+					block.setType(buildbrush.get(event.getPlayer()));
+					player.sendMessage(ChatColor.LIGHT_PURPLE + "Splat!");
+			}
 		}
 	}
 	

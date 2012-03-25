@@ -22,6 +22,11 @@ public class Tools extends JavaPlugin{
 		
 		public static Map<String, String> bptools = new HashMap<String, String>();
 		public static Map<String, String> secret = new HashMap<String, String>();
+		Map<String, String> autopilot = MyPlayerListener.autopilot;
+		Map<String, String> normal = MyPlayerListener.normal;
+		Map<String, String> high = MyPlayerListener.high;
+		HashMap<Player, Material> paintbrush = MyPlayerListener.paintbrush;
+		HashMap<Player, Material> buildbrush = MyPlayerListener.buildbrush;
 		
 		@Override
 		public void onDisable() {
@@ -54,9 +59,11 @@ public class Tools extends JavaPlugin{
 						}else if(args[0].equalsIgnoreCase("list") || args[0].equalsIgnoreCase("l")){	
 							player.sendMessage(ChatColor.GREEN + "[BPTools]" + ChatColor.WHITE + ": Welcome to BPTools, " + ChatColor.BLUE + "List" + ChatColor.WHITE + "!");
 							player.sendMessage(ChatColor.GREEN + "[BPTools]" + ChatColor.WHITE + ": (INK_SAC) The AutoPilot Tool; " + " | " + ChatColor.BLUE + "Turn On/Off AutoPilot" + ChatColor.WHITE + "!");
-							player.sendMessage(ChatColor.GREEN + "[BPTools]" + ChatColor.WHITE + ": (ROSE_RED) The Teleport/Transport Tool; " + " | " + ChatColor.BLUE + "Teleports You, or Transport you!" + ChatColor.WHITE + "!");
-							player.sendMessage(ChatColor.GREEN + "[BPTools]" + ChatColor.WHITE + ": (CACTUS_GREEN) The Instante Block Break Tool; " + " | " + ChatColor.BLUE + "Break Blocks Instantly!" + ChatColor.WHITE + "!");
-							player.sendMessage(ChatColor.GREEN + "[BPTools]" + ChatColor.WHITE + ": (Cocoa_Beans) The GiveMe Tool; " + " | " + ChatColor.BLUE + "Give You The Item You Right Click!" + ChatColor.WHITE + "!");
+							player.sendMessage(ChatColor.GREEN + "[BPTools]" + ChatColor.WHITE + ": (ROSE_RED) The Teleport/Transport Tool; " + " | " + ChatColor.BLUE + "Teleports You, or Transport you" + ChatColor.WHITE + "!");
+							player.sendMessage(ChatColor.GREEN + "[BPTools]" + ChatColor.WHITE + ": (CACTUS_GREEN) The Instante Block Break Tool; " + " | " + ChatColor.BLUE + "Break Blocks Instantly" + ChatColor.WHITE + "!");
+							player.sendMessage(ChatColor.GREEN + "[BPTools]" + ChatColor.WHITE + ": (Cocoa_Beans) The GiveMe Tool; " + " | " + ChatColor.BLUE + "Give You The Item You Right Click" + ChatColor.WHITE + "!");
+							player.sendMessage(ChatColor.GREEN + "[BPTools]" + ChatColor.WHITE + ": (Lapis_Lazuli) The Painting Tool; " + " | " + ChatColor.BLUE + "Paints The Block You Left Click, Whit The Block Type You Define Whit Right Click" + ChatColor.WHITE + "!");
+							player.sendMessage(ChatColor.GREEN + "[BPTools]" + ChatColor.WHITE + ": (Purple_Dye) The Build Tool; " + " | " + ChatColor.BLUE + "Place The Block Above The Block You Left Click, Whit The Block Type You Define Whit Right Click" + ChatColor.WHITE + "!");
 							
 						}else if(args[0].equalsIgnoreCase("enable") || args[0].equalsIgnoreCase("e")){
 							if(!bptools.containsKey(player.getName())){
@@ -82,6 +89,12 @@ public class Tools extends JavaPlugin{
 						}else if(args[0].equalsIgnoreCase("reload") || args[0].equalsIgnoreCase("r")){
 							bptools.clear();
 							secret.clear();
+							autopilot.clear();
+							normal.clear();
+							high.clear();
+							paintbrush.clear();
+							buildbrush.clear();
+							
 								player.sendMessage(ChatColor.GREEN + "[BPTools]" + ChatColor.WHITE + ": The Plugin Is " + ChatColor.BLUE + "RELOADED" + ChatColor.WHITE + "!");
 						
 						}else if(args[0].equalsIgnoreCase("secret")){
