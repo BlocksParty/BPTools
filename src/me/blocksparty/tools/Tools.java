@@ -32,6 +32,7 @@ public class Tools extends JavaPlugin{
 		public void onDisable() {
 			PluginDescriptionFile pdfFile = this.getDescription();
 			this.logger.info(pdfFile.getName() + " Has Been Disabled!");
+			BPToolsPlayer.reset();
 			
 		}
 		
