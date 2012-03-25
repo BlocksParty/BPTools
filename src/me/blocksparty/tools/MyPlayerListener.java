@@ -15,6 +15,7 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.material.MaterialData;
 import org.bukkit.util.Vector;
 
@@ -36,27 +37,31 @@ public class MyPlayerListener implements Listener{
 			MaterialData materialdata = event.getItem().getData();
 			MaterialData inksac = new MaterialData(Material.INK_SACK, (byte) 0);
 			MaterialData rosered = new MaterialData(Material.INK_SACK, (byte) 1);
+			MaterialData cactusgreen = new MaterialData(Material.INK_SACK, (byte) 2);
+			MaterialData cocoabeans = new MaterialData(Material.INK_SACK, (byte) 3);
 
 		if(materialdata.equals(inksac)){
 				if(event.getAction() == Action.RIGHT_CLICK_AIR){
-					if(!autopilot.containsKey(player.getName())){
-						autopilot.put(player.getName(), "autopilot");
-						player.sendMessage(ChatColor.LIGHT_PURPLE + "The AutoPilot is Enable, and the speed is set to; Slow!");
-						event.setCancelled(true);
-					}else if(autopilot.containsKey(player.getName())){
-						if(!normal.containsKey(player.getName())){
-							normal.put(player.getName(), "speed");
-							player.sendMessage(ChatColor.LIGHT_PURPLE + "The AutoPilot speed is set to; Normal!");
-						}else if(normal.containsKey(player.getName()) && !high.containsKey(player.getName())){
-							high.put(player.getName(), "speed");
-							player.sendMessage(ChatColor.LIGHT_PURPLE + "The AutoPilot speed is set to; High!");
-						}else if(normal.containsKey(player.getName()) && high.containsKey(player.getName())){
-							normal.remove(player.getName());
-							high.remove(player.getName());
-							player.sendMessage(ChatColor.LIGHT_PURPLE + "The AutoPilot speed is set to; Slow!");
-						}
-				}
+					event.setCancelled(true);
+						if(!autopilot.containsKey(player.getName())){
+							autopilot.put(player.getName(), "autopilot");
+							player.sendMessage(ChatColor.LIGHT_PURPLE + "The AutoPilot is Enable, and the speed is set to; Slow!");
+							event.setCancelled(true);
+						}else if(autopilot.containsKey(player.getName())){
+							if(!normal.containsKey(player.getName())){
+								normal.put(player.getName(), "speed");
+								player.sendMessage(ChatColor.LIGHT_PURPLE + "The AutoPilot speed is set to; Normal!");
+							}else if(normal.containsKey(player.getName()) && !high.containsKey(player.getName())){
+								high.put(player.getName(), "speed");
+								player.sendMessage(ChatColor.LIGHT_PURPLE + "The AutoPilot speed is set to; High!");
+							}else if(normal.containsKey(player.getName()) && high.containsKey(player.getName())){
+								normal.remove(player.getName());
+								high.remove(player.getName());
+								player.sendMessage(ChatColor.LIGHT_PURPLE + "The AutoPilot speed is set to; Slow!");
+							}
+					}
 			}else if(event.getAction() == Action.LEFT_CLICK_AIR){
+				event.setCancelled(true);
 					if(autopilot.containsKey(player.getName())){
 						autopilot.remove(player.getName());
 						normal.remove(player.getName());
@@ -86,6 +91,27 @@ public class MyPlayerListener implements Listener{
 				}
 			
 			
+		}else if(materialdata.equals(cactusgreen)){
+			event.setCancelled(true);
+				if(event.getAction() == Action.RIGHT_CLICK_AIR){
+					Block targetblock = player.getTargetBlock(null, 50);
+					targetblock.setType(Material.AIR);
+					event.setCancelled(true);
+				}else if(event.getAction() == Action.LEFT_CLICK_BLOCK){
+					Block clickedblock = event.getClickedBlock();
+					clickedblock.setType(Material.AIR);
+					event.setCancelled(true);
+				}
+		}else if(materialdata.equals(cocoabeans)){
+			event.setCancelled(true);
+				if(event.getAction() == Action.RIGHT_CLICK_BLOCK){
+					Block clickedblock = event.getClickedBlock();
+					Material material = clickedblock.getType();
+					ItemStack itemstack = new ItemStack(material, 64);
+					player.getInventory().addItem(itemstack);
+					player.updateInventory();
+					player.sendMessage(ChatColor.LIGHT_PURPLE + "Enjoy Your; " + ChatColor.WHITE + material + ChatColor.LIGHT_PURPLE + "!");
+				}
 		}
 	}
 	

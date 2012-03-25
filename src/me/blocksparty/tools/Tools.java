@@ -54,7 +54,10 @@ public class Tools extends JavaPlugin{
 						}else if(args[0].equalsIgnoreCase("list") || args[0].equalsIgnoreCase("l")){	
 							player.sendMessage(ChatColor.GREEN + "[BPTools]" + ChatColor.WHITE + ": Welcome to BPTools, " + ChatColor.BLUE + "List" + ChatColor.WHITE + "!");
 							player.sendMessage(ChatColor.GREEN + "[BPTools]" + ChatColor.WHITE + ": (INK_SAC) The AutoPilot Tool; " + " | " + ChatColor.BLUE + "Turn On/Off AutoPilot" + ChatColor.WHITE + "!");
-
+							player.sendMessage(ChatColor.GREEN + "[BPTools]" + ChatColor.WHITE + ": (ROSE_RED) The Teleport/Transport Tool; " + " | " + ChatColor.BLUE + "Teleports You, or Transport you!" + ChatColor.WHITE + "!");
+							player.sendMessage(ChatColor.GREEN + "[BPTools]" + ChatColor.WHITE + ": (CACTUS_GREEN) The Instante Block Break Tool; " + " | " + ChatColor.BLUE + "Break Blocks Instantly!" + ChatColor.WHITE + "!");
+							player.sendMessage(ChatColor.GREEN + "[BPTools]" + ChatColor.WHITE + ": (Cocoa_Beans) The GiveMe Tool; " + " | " + ChatColor.BLUE + "Give You The Item You Right Click!" + ChatColor.WHITE + "!");
+							
 						}else if(args[0].equalsIgnoreCase("enable") || args[0].equalsIgnoreCase("e")){
 							if(!bptools.containsKey(player.getName())){
 								bptools.put(player.getName(), "bptools");
