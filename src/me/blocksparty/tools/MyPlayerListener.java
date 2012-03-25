@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.bukkit.ChatColor;
+import org.bukkit.Chunk;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -43,7 +44,8 @@ public class MyPlayerListener implements Listener{
 			MaterialData cocoabeans = new MaterialData(Material.INK_SACK, (byte) 3);
 			MaterialData lapislazuli = new MaterialData(Material.INK_SACK, (byte) 4);
 			MaterialData purpledye = new MaterialData(Material.INK_SACK, (byte) 5);
-
+			MaterialData cyandye = new MaterialData(Material.INK_SACK, (byte) 6);
+			
 		if(materialdata.equals(inksac)){
 				if(event.getAction() == Action.RIGHT_CLICK_AIR){
 					event.setCancelled(true);
@@ -150,10 +152,46 @@ public class MyPlayerListener implements Listener{
 				}else if(event.getAction() == Action.RIGHT_CLICK_AIR){
 					if (buildbrush.isEmpty()) return;
 					Block targetblock = player.getTargetBlock(null, 50);
-					Block block = targetblock;
+					Block block = targetblock.getRelative(BlockFace.UP);
 					block.setType(buildbrush.get(event.getPlayer()));
-					player.sendMessage(ChatColor.LIGHT_PURPLE + "Splat!");
+					player.sendMessage(ChatColor.LIGHT_PURPLE + "Poof!");
 			}
+		}else if(materialdata.equals(cyandye)){
+			event.setCancelled(true);
+				if(event.getAction() == Action.RIGHT_CLICK_BLOCK){
+					Block b = event.getClickedBlock();
+					   Chunk chunk = b.getChunk();
+					   int minX = chunk.getX() * 16;
+					   int minZ = chunk.getZ() * 16;
+					   int maxX = (chunk.getX() * 16) + 16;
+					   int maxZ = (chunk.getZ() * 16) + 16;
+					   for(int x = 0; x + minX < maxX; x++){
+					    for(int z = 0; z + minZ < maxZ; z++){
+					     for(int y = 0; y < b.getWorld().getMaxHeight(); y++){
+					    	 b.getWorld().getBlockAt(x + minX, y, z + minZ).setType(Material.AIR);
+					     }
+					    }
+					   }
+					
+				}else if(event.getAction() == Action.LEFT_CLICK_BLOCK){
+					 Block b = event.getClickedBlock();
+					 	Material origMat = b.getType();
+				        Chunk chunk = b.getChunk();
+				        int minX = chunk.getX() * 16;
+				        int minZ = chunk.getZ() * 16;
+				        int maxX = (chunk.getX() * 16) + 16;
+				        int maxZ = (chunk.getZ() * 16) + 16;
+				        for(int x = 0; x + minX < maxX; x++){
+				         for(int z = 0; z + minZ < maxZ; z++){
+				          for(int y = 0; y < b.getWorld().getMaxHeight(); y++){
+				           Block selb = b.getWorld().getBlockAt(x + minX, y, z + minZ);
+				           if(selb.getType().equals(origMat)){
+				            selb.setType(Material.AIR);
+				           }
+				          }
+				            }
+				        }
+				}
 		}
 	}
 	
@@ -182,7 +220,7 @@ public class MyPlayerListener implements Listener{
 	public void onEntityDamage(EntityDamageEvent event){
 		if(event.getEntity() instanceof Player){
 			Player player = (Player) event.getEntity();
-		    	if(autopilot.containsKey(player.getName())){
+		    	if(bptools.containsKey(player.getName())){
 		    		event.setCancelled(true);
 		    	}
 			}

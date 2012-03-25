@@ -64,14 +64,21 @@ public class Tools extends JavaPlugin{
 							player.sendMessage(ChatColor.GREEN + "[BPTools]" + ChatColor.WHITE + ": (Cocoa_Beans) The GiveMe Tool; " + " | " + ChatColor.BLUE + "Give You The Item You Right Click" + ChatColor.WHITE + "!");
 							player.sendMessage(ChatColor.GREEN + "[BPTools]" + ChatColor.WHITE + ": (Lapis_Lazuli) The Painting Tool; " + " | " + ChatColor.BLUE + "Paints The Block You Left Click, Whit The Block Type You Define Whit Right Click" + ChatColor.WHITE + "!");
 							player.sendMessage(ChatColor.GREEN + "[BPTools]" + ChatColor.WHITE + ": (Purple_Dye) The Build Tool; " + " | " + ChatColor.BLUE + "Place The Block Above The Block You Left Click, Whit The Block Type You Define Whit Right Click" + ChatColor.WHITE + "!");
+							player.sendMessage(ChatColor.GREEN + "[BPTools]" + ChatColor.WHITE + ": (Cyan_Dye) The Land Tool; " + " | " + ChatColor.BLUE + "Remove The Chunk Within The Clicked Block" + ChatColor.WHITE + "!");
 							
 						}else if(args[0].equalsIgnoreCase("enable") || args[0].equalsIgnoreCase("e")){
 							if(!bptools.containsKey(player.getName())){
 								bptools.put(player.getName(), "bptools");
 								
-									ItemStack inksack = new ItemStack(Material.INK_SACK, (byte) 0);
+									ItemStack inksack = new ItemStack(Material.INK_SACK, 1, (byte) 0);
+									ItemStack rosered = new ItemStack(Material.INK_SACK, 1, (byte) 1);
+									ItemStack cactusgreen = new ItemStack(Material.INK_SACK, 1, (byte) 2);
+									ItemStack cocoabeans = new ItemStack(Material.INK_SACK, 1, (byte) 3);
+									ItemStack lapislazuli = new ItemStack(Material.INK_SACK, 1, (byte) 4);
+									ItemStack purpledye = new ItemStack(Material.INK_SACK, 1, (byte) 5);
+									ItemStack cyandye = new ItemStack(Material.INK_SACK, 1, (byte) 6);
 									
-									player.getInventory().addItem(inksack);
+									player.getInventory().addItem(inksack, rosered, cactusgreen, cocoabeans, lapislazuli, purpledye, cyandye);
 											player.updateInventory();
 												player.sendMessage(ChatColor.GREEN + "[BPTools]" + ChatColor.WHITE + ": The Tools Is " + ChatColor.BLUE + "ENABLE" + ChatColor.WHITE + "!");
 							}else{
