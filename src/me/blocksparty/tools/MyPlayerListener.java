@@ -23,13 +23,13 @@ import org.bukkit.util.Vector;
 public class MyPlayerListener implements Listener{
 	public static Tools plugin;
 	
-	Map<String, String> bptools = MyHashMapStorage.bptools;
-	Map<String, String> secret = MyHashMapStorage.secret;
-	Map<String, String> autopilot = MyHashMapStorage.autopilot;
-	Map<String, String> normal = MyHashMapStorage.normal;
-	Map<String, String> high = MyHashMapStorage.high;
-	HashMap<Player, Material> paintbrush = MyHashMapStorage.paintbrush;
-	HashMap<Player, Material> buildbrush = MyHashMapStorage.buildbrush;
+	static Map<String, String> bptools = MyHashMapStorage.bptools;
+	static Map<String, String> secret = MyHashMapStorage.secret;
+	static Map<String, String> autopilot = MyHashMapStorage.autopilot;
+	static Map<String, String> normal = MyHashMapStorage.normal;
+	static Map<String, String> high = MyHashMapStorage.high;
+	static HashMap<Player, Material> paintbrush = MyHashMapStorage.paintbrush;
+	static HashMap<Player, Material> buildbrush = MyHashMapStorage.buildbrush;
 
 	@EventHandler
 	public void onPlayerInteract(PlayerInteractEvent event){
