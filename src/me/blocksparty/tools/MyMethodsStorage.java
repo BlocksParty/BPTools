@@ -9,22 +9,18 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 public class MyMethodsStorage {
-	private Tools plugin;
-	
-	Map<String, String> bptools = MyHashMapStorage.bptools;
-	Map<String, String> secret = MyHashMapStorage.secret;
-	Map<String, String> autopilot = MyHashMapStorage.autopilot;
-	Map<String, String> normal = MyHashMapStorage.normal;
-	Map<String, String> high = MyHashMapStorage.high;
-	HashMap<Player, Material> paintbrush = MyHashMapStorage.paintbrush;
-	HashMap<Player, Material> buildbrush = MyHashMapStorage.buildbrush;
-	
-	
 	public MyMethodsStorage(Tools plugin) {
-		this.plugin = plugin;
 	}
 	
-	public void bptools(Player player){
+	static Map<String, String> bptools = MyHashMapStorage.bptools;
+	static Map<String, String> secret = MyHashMapStorage.secret;
+	static Map<String, String> autopilot = MyHashMapStorage.autopilot;
+	static Map<String, String> normal = MyHashMapStorage.normal;
+	static Map<String, String> high = MyHashMapStorage.high;
+	static HashMap<Player, Material> paintbrush = MyHashMapStorage.paintbrush;
+	static HashMap<Player, Material> buildbrush = MyHashMapStorage.buildbrush;
+	
+	public static void bptools(Player player){
 		player.sendMessage(ChatColor.GREEN + "[BPTools]" + ChatColor.WHITE + ": Welcome to BPTools, brought to you by; " + ChatColor.BLUE + "BlocksParty" + ChatColor.WHITE + "!");
 		player.sendMessage(ChatColor.GREEN + "[BPTools]" + ChatColor.WHITE + ": /bptools list" + " | " + ChatColor.BLUE + "The Tools List" + ChatColor.WHITE + "!");
 		player.sendMessage(ChatColor.GREEN + "[BPTools]" + ChatColor.WHITE + ": /bptools enable" + " | " + ChatColor.BLUE + "Enable The Plugin" + ChatColor.WHITE + "!");
@@ -32,7 +28,7 @@ public class MyMethodsStorage {
 		player.sendMessage(ChatColor.GREEN + "[BPTools]" + ChatColor.WHITE + ": /bptools reload" + " | " + ChatColor.BLUE + "Reload The Plugin" + ChatColor.WHITE + "!");
 	}
 	
-	public void list(Player player){
+	public static void list(Player player){
 		player.sendMessage(ChatColor.GREEN + "[BPTools]" + ChatColor.WHITE + ": Welcome to BPTools, " + ChatColor.BLUE + "List" + ChatColor.WHITE + "!");
 		player.sendMessage(ChatColor.GREEN + "[BPTools]" + ChatColor.WHITE + ": (INK_SAC) The AutoPilot Tool; " + " | " + ChatColor.BLUE + "Turn On/Off AutoPilot" + ChatColor.WHITE + "!");
 		player.sendMessage(ChatColor.GREEN + "[BPTools]" + ChatColor.WHITE + ": (ROSE_RED) The Teleport/Transport Tool; " + " | " + ChatColor.BLUE + "Teleports You, or Transport you" + ChatColor.WHITE + "!");
@@ -43,7 +39,7 @@ public class MyMethodsStorage {
 		player.sendMessage(ChatColor.GREEN + "[BPTools]" + ChatColor.WHITE + ": (Cyan_Dye) The Land Tool; " + " | " + ChatColor.BLUE + "Remove The Chunk Within The Clicked Block" + ChatColor.WHITE + "!");
 	}
 	
-	public void enable(Player player){	
+	public static void enable(Player player){	
 		if(!bptools.containsKey(player.getName())){
 			bptools.put(player.getName(), "bptools");
 			ItemStack inksack = new ItemStack(Material.INK_SACK, 1, (byte) 0);
@@ -59,19 +55,22 @@ public class MyMethodsStorage {
 			player.sendMessage(ChatColor.GREEN + "[BPTools]" + ChatColor.WHITE + ": The Tools Is " + ChatColor.BLUE + "ENABLE" + ChatColor.WHITE + "!");
 		}else{
 			onErrors(player);
+			player.sendMessage(ChatColor.DARK_RED + "- The plugin is already Enable!");
 		}
 	}
 	
-	public void disable(Player player){
+	public static void disable(Player player){
 		if(bptools.containsKey(player.getName())){
 			bptools.remove(player.getName());
 			player.sendMessage(ChatColor.GREEN + "[BPTools]" + ChatColor.WHITE + ": The Tools Is " + ChatColor.BLUE + "DISABLE" + ChatColor.WHITE + "!");
 			
 		}else{
 			onErrors(player);
+			player.sendMessage(ChatColor.DARK_RED + "- The plugin is already Disable, or not Enable in the first place!");
 		}
 	}
-	public void reload(Player player){
+	
+	public static void reload(Player player){
 		bptools.clear();
 		secret.clear();
 		autopilot.clear();
@@ -83,14 +82,14 @@ public class MyMethodsStorage {
 		player.sendMessage(ChatColor.GREEN + "[BPTools]" + ChatColor.WHITE + ": The Plugin Is " + ChatColor.BLUE + "RELOADED" + ChatColor.WHITE + "!");
 	}
 	
-	public void secret(Player player){
+	public static void secret(Player player){
 		secret.put(player.getName(), "secret");
 		ItemStack wbhead = new ItemStack(Material.WORKBENCH);
 			player.getInventory().setHelmet(wbhead);
 				player.sendMessage(ChatColor.GREEN + "[BPTools]" + ChatColor.WHITE + ": Goncratulations, You Found The Secret Of This Plugin: " + ChatColor.BLUE + "WORKBENCH HEAD" + ChatColor.WHITE + "! Enjoy Your New Helmet!");
 	}
 	
-	public void onErrors(Player player){
-		player.sendMessage(ChatColor.DARK_RED + "We are sorry, but something whent wrong!");
+	public static void onErrors(Player player){
+		player.sendMessage(ChatColor.DARK_RED + "We are sorry, but something went wrong;");
 	}
 }

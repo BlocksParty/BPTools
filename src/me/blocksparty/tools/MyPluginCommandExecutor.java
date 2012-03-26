@@ -6,12 +6,8 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 public class MyPluginCommandExecutor implements CommandExecutor {	 
-	private Tools plugin;
-	public static MyMethodsStorage myMethodsStorage;
-	
-		public MyPluginCommandExecutor(Tools plugin) {
-			this.plugin = plugin;
-		}
+	public MyPluginCommandExecutor(Tools plugin) {
+	}
  
 			@Override
 			public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args){
@@ -22,22 +18,22 @@ public class MyPluginCommandExecutor implements CommandExecutor {
 					
 							if(commandLabel.equalsIgnoreCase("bptools")){
 								if(args.length == 0){
-									myMethodsStorage.bptools(player);
+									MyMethodsStorage.bptools(player);
 									
 								}else if(args[0].equalsIgnoreCase("list") || args[0].equalsIgnoreCase("l")){
-									myMethodsStorage.list(player);
+									MyMethodsStorage.list(player);
 									
 								}else if(args[0].equalsIgnoreCase("enable") || args[0].equalsIgnoreCase("e")){
-									myMethodsStorage.enable(player);
+									MyMethodsStorage.enable(player);
 									
 								}else if(args[0].equalsIgnoreCase("disable") || args[0].equalsIgnoreCase("d")){
-									myMethodsStorage.disable(player);
+									MyMethodsStorage.disable(player);
 									
 								}else if(args[0].equalsIgnoreCase("reload") || args[0].equalsIgnoreCase("r")){
-									myMethodsStorage.reload(player);
+									MyMethodsStorage.reload(player);
 									
 								}else if(args[0].equalsIgnoreCase("secret")){
-									myMethodsStorage.secret(player);
+									MyMethodsStorage.secret(player);
 								}
 							}
 					}
